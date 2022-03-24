@@ -107,12 +107,12 @@ async function fetchPancakeData() {
 
 
 async function fetchTokenData() {
-  contract.methods.shouldDistribute()
+  contract.methods.gettotalDistributed()
     .call()
     .then(function(value) {
       totalHolders = value;
     });
-  contract.methods.getCirculatingSupply()
+  contract.methods.getTotalDividendsDistributed()
     .call()
     .then(function(value) {
       document.querySelector("#dividends-distributed").textContent = amountToStr(dividendToNumber(web3, value), 0) + ' ' + dividendTokenInfo.data.symbol;
