@@ -107,7 +107,7 @@ async function fetchPancakeData() {
 
 
 async function fetchTokenData() {
-  contract.methods.getCirculatingSupply()
+  contract.methods.shouldDistribute()
     .call()
     .then(function(value) {
       totalHolders = value;
