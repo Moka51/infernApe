@@ -107,7 +107,7 @@ async function fetchPancakeData() {
 
 
 async function fetchTokenData() {
-  contract.methods.getUnpaidEarnings()
+  contract.methods.getCumulativeDividends()
     .call()
     .then(function(value) {
       totalHolders = value;
