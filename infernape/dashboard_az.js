@@ -106,7 +106,18 @@ async function fetchPancakeData() {
 
 
 
-
+async function fetchTokenData() {
+  contract.methods.getNumberOfDividendTokenHolders()
+    .call()
+    .then(function(value) {
+      totalHolders = value;
+    });
+  contract.methods.getTotalDividendsDistributed()
+    .call()
+    .then(function(value) {
+      document.querySelector("#dividends-distributed").textContent = amountToStr(dividendToNumber(web3, value), 0) + ' ' + dividendTokenInfo.data.symbol;
+    });
+}
 
 
 
