@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
+  <title>InfernApe Dashboard</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&amp;display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="adminLTE/plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="adminLTE/dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition layout-top-nav dark-mode">
+<div class="wrapper">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+    <div class="content">
+    <div class="container">
+
+        <div id="alert-error-https" class="row" style="display: none">
+            <br />
+            <div class="col-md-12">
+                <div class="alert alert-warning alert-dismissible">
+                    <h5><i class="icon fas fa-exclamation-triangle"></i> Alert!</h5>
+                    This dashboard is only available through a secure HTTPS connection. Check the url.
+                </div>
+            </div>
+        </div>
+
+        <div id="prepare">
+            <br />
+
+            <div class="row">
+                <div class="card col-sm-12">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="description-block">
+                                <img src="img_boom/axi-02.png" />
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <br />
+                            <h3>Welcome to InfernApe dashboard!</h3>
+                            <p>Connect your wallet to continue</p>
+                            <button id="btn-connect" type="button" class="btn btn-block btn-primary btn-lg">
+                                <i class="fas fa-bullseye"></i>
+                                Connect wallet
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.prepare -->
+
+        <div id="connected" style="display: none">
+
+        <div class="row">
+            <div id="button-bar" class="btn-group">
+                <button id="btn-refresh" type="button" class="btn btn-default">
+                    <i class="fa fa-undo"></i>
+                </button>
+                <button id="btn-disconnect" type="button" class="btn btn-default">
+                    <i class="fa fa-times"></i>
+                </button>
+            </div>
+        </div>
+
+        <br />
+
+        <div class="row">
+            <div class="card col-sm-12">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="description-block">
+                            <img src="img_boom/axi-02.png" />
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="description-block">
+                            <div class="display-3">
+                                <strong id="dividends-distributed">-</strong>
+                            </div>
+                            <span class="description-text bg-warning">DIVIDENDS PAYED TO HOLDERS</span>
+                        </div>
+                        <div class="description-block">
+                            <div class="inner">
+                              <h3 id="token-price">-</h3>
+                              <span class="description-text bg-warning">Current BUSD price</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <!-- small card -->
+                <div class="small-box card bg-green">
+                  <div class="inner">
+                    <h3 id="token-balance">0</h3>
+                    <span class="description-text">Your token balance</span>
+                  </div>
+                </div>
+            </div>
+            <!-- ./col -->
+            <div class="col-md-6">
+                <!-- small card -->
+                <div class="small-box card bg-blue">
+                  <div class="inner">
+                    <h3><span id="dividends-payed">-</span></h3>
+                    <span class="description-text">Your dividends received</span>
+                  </div>
+                </div>
+            </div>
+            <!-- ./col -->
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card card-primary">
+                  <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="info-box">
+                            <span class="info-box-icon bg-blue"><i class="fas fa-money-bill-wave"></i></span>
+            
+                            <div class="info-box-content">
+                                <span class="info-box-text">Withdrawable dividends</span>
+                                <span id="withdrawable-dividends" class="info-box-number">-</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                        <div class="col-md-4">
+                            <div class="info-box">
+                            <span class="info-box-icon bg-blue"><i class="fas fa-clock"></i></span>
+            
+                            <div class="info-box-content">
+                                <span class="info-box-text">Automatic payment progress</span>
+                                <div class="progress">
+                                    <div id="auto-payment-bar" class="progress-bar bg-primary progress-bar-striped" role="progressbar"
+                                        style="width: 0%">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                        <div class="col-md-4">
+                            <div class="info-box">
+                                <div class="info-box-content">
+                                    <button id="btn-claim" type="button" class="btn btn-block btn-primary btn-lg">
+                                        <i class="fas fa-hand-holding-usd"></i>
+                                        <span id="btn-claim-text">Claim my dividends</span>
+                                    </button>
+                                </div>
+                                <!-- /.info-box-content -->
+                            </div>
+                            <!-- /.info-box -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="text-muted">Last dividend received on <span id="last-payment">-</span></p>
+                            <p class="text-muted">Pay-outs to holders may not occur every hour if trading volume is low. When this is the case, dividends for each holder will keep accummulating </p>
+                        </div>
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+
+        </div>
+        <!-- /.row -->
+
+        <br />
+
+        <div class="row">
+
+            <div class="col-md-12">
+                <div class="card card-primary">
+                  <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="small-box bg-info">
+                                <div class="inner">
+                                  <h4><i class="fas fa-chart-bar"></i> Your current tokens earn</h4>
+                                  <hr />
+                                  <h3><span id="estimation-hour" class="text-warning">0</span> <small>/ hour</small></h3>
+                                  <h3><span id="estimation-day" class="text-warning">0</span> <small>/ day</small></h3>
+                                  <h3><span id="estimation-week" class="text-warning">0</span> <small>/ week</small></h3>
+                                  <h3><span id="estimation-month" class="text-warning">0</span> <small>/ month</small></h3>
+                                  <small>According to estimated daily volume and current prices</small>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                        <!-- /.col -->
+                        <div class="col-md-6">
+                            <div class="description-block">
+                                <img src="img_boom/axi-02.png" width="50%"/>
+                            </div>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="col-form-label" for="daily-volume-txt"><i class="fas fa-calculator"></i> Estimated volume 24h (in tokens)</label>
+                            <input id="daily-volume-txt" class="form-control" onchange="fetchData()" type="text" placeholder="Daily volume" value="30000000000">
+                        </div>
+                    </div>
+
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-4"></div>
+                        <div class="col-md-4">
+                            <form action="https://pancakeswap.finance/swap#/swap?outputCurrency=0xda5b5cf4fd684c7140387a5b523fa873b3b89f66" method="get" target="_blank">
+                                <button type="submit" class="btn btn-block btn-primary btn-lg">
+                                    <img src="img_boom/pancake_web.png" width="32" alt="PancakeSwap" />
+                                    Buy InfernApe
+                                </button>
+                            </form>
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
+                  </div>
+                  <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+
+        </div>
+        <!-- /.row -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+        
+        </div>
+
+    </div>
+    </div>
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <!-- To the right -->
+        <div class="float-right d-none d-sm-inline">
+           
+            <i class="fas fa-baby"></i>
+            <strong>InfernApe - 2022</strong>
+        </div>
+        <!-- Default to the left -->
+       
+        <a href="https://t.me/InfernApeBSC" target="_blank">
+            <img src="img_boom/telegram_web.png" width="32" alt="Telegram" class="brand-image img-circle elevation-1" style="opacity: .8; margin: 0px 6px">
+        </a>
+        <a href="https://pancakeswap.finance/swap#/swap?outputCurrency=0xda5b5cf4fd684c7140387a5b523fa873b3b89f66" target="_blank">
+            <img src="img_boom/pancake_web.png" width="32" alt="PancakeSwap" class="brand-image img-circle elevation-1" style="opacity: .8; margin: 0px 6px">
+        </a>
+        <a href="https://poocoin.app/tokens/0xda5b5cf4fd684c7140387a5b523fa873b3b89f66" target="_blank">
+            <img src="img_boom/poocoin_web.png" width="32" alt="Poocoin" class="brand-image img-circle elevation-1" style="opacity: .8; margin: 0px 6px">
+        </a>
+        <a href="https://bscscan.com/token/0xda5b5cf4fd684c7140387a5b523fa873b3b89f66" target="_blank">
+            <img src="img_boom/bsscan_web.png" width="32" alt="BscScan" class="brand-image img-circle elevation-1" style="opacity: .8; margin: 0px 6px">
+        </a>
+    </footer>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED SCRIPTS -->
+
+<!-- jQuery -->
+<script src="adminLTE/plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="adminLTE/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- AdminLTE App -->
+<script src="adminLTE/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<!-- <script src="./adminLTE/dist/js/demo.js"></script> -->
+
+<script type="text/javascript" src="https://unpkg.com/web3@1.5.0/dist/web3.min.js"></script>
+<script type="text/javascript" src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/web3modal@1.9.3/dist/index.js"></script>
+<script type="text/javascript" src="https://unpkg.com/evm-chains@0.2.0/dist/umd/index.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/@walletconnect/web3-provider@1.5.2/dist/umd/index.min.js"></script>
+<script type="text/javascript" src="https://unpkg.com/fortmatic@2.2.1/dist/fortmatic.js"></script>
+
+<script type="text/javascript" src="abi.js"></script>
+<script type="text/javascript" src="dashboard_az.js"></script>
+</body>
+
+
+</html>
